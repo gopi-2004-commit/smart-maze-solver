@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Maze Solver – A* search</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Smart Maze Solver</h1>
+    <!-- <p>Watch the A* algorithm, guided by a heuristic, find the shortest path through the maze.</p> -->
+  </header>
+  <div id="error" class="error" role="alert" hidden></div>
+
+  <div class="layout">
+    <section class="stage" id="stage">
+      <canvas id="maze" aria-label="Maze grid. Draw walls by dragging; drag the start and goal cells to move them."></canvas>
+      <p class="hint">Drag to draw walls, right-click or drag a wall to erase, drag the orange start or red goal to move them.</p>
+    </section>
+
+    <aside class="panel">
+      <div class="btns">
+        <button id="start" class="primary" type="button">Start search</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
+      <div class="btns">
+        <button id="new" type="button">New maze</button>
+        <button id="obstacles" type="button">Random obstacles</button>
+        <button id="clear" type="button">Clear walls</button>
+      </div>
+
+      <label for="heuristic">Heuristic</label>
+      <select id="heuristic"></select>
+
+      <label for="size">Grid size</label>
+      <select id="size">
+        <option value="21x31">Small (21 × 31)</option>
+        <option value="31x41" selected>Medium (31 × 41)</option>
+        <option value="41x61">Large (41 × 61)</option>
+      </select>
+
+      <label for="speed">Speed <span id="speedV" class="muted"></span></label>
+      <input id="speed" type="range" min="0" max="6" value="3">
+
+      <div class="status" id="status" aria-live="polite">Loading…</div>
+      <dl class="stats">
+        <div><dt>Nodes expanded</dt><dd id="sExpanded">0</dd></div>
+        <div><dt>Frontier size</dt><dd id="sFrontier">0</dd></div>
+        <div><dt>Path length</dt><dd id="sPath">–</dd></div>
+        <div><dt>Solve time</dt><dd id="sTime">–</dd></div>
+      </dl>
+
+      <ul class="legend">
+        <li><i style="background:var(--c-start)"></i>Start</li>
+        <li><i style="background:var(--c-goal)"></i>Goal</li>
+        <li><i style="background:var(--c-frontier)"></i>Frontier (open set)</li>
+        <li><i style="background:var(--c-closed)"></i>Explored (closed set)</li>
+        <li><i style="background:var(--c-path)"></i>Shortest path</li>
+        <li><i style="background:var(--c-wall)"></i>Wall</li>
+      </ul>
+
+      <button id="compare" type="button">Compare heuristics</button>
+      <table id="cmp" class="cmp" hidden>
+        <thead><tr><th>Heuristic</th><th>Cost</th><th>Expanded</th><th>ms</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </aside>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
